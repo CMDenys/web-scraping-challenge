@@ -12,7 +12,7 @@ def init_browser():
 @app
 def scrape():
     browser = init_browser()
-    data_dict{}
+    # data_dict{}
 
     #First step, visit the mars.nasa.gov.news website.
     news_url = "https://mars.nasa.gov/news/"
@@ -40,3 +40,4 @@ def scrape():
     mars_table_df.columns = ["Description", "Fact"]
     html_table = mars_table_df.to_html()
     html_table.replace('\n', '')
+
