@@ -1,19 +1,18 @@
 from splinter import Browser
 from bs4 import BeautifulSoup as bs
-import time
-import pandas as pd
-import pymongo
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 def init_browser():
     # Open ChromeDriver
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=False)
 
-@app
+
 def scrape():
     browser = init_browser()
 
-    mars_data = {}
+    mars_jnData = {}
    
     #First step, visit the mars.nasa.gov.news website.
     news_url = "https://mars.nasa.gov/news/"
@@ -71,7 +70,7 @@ def scrape():
     hemi_names = soup.find_all('div', class_='item')
 
     for i in hemi_names:
-        title = i.find("h3").text.strip()
+        title_hemi = i.find("h3").text.strip()
         link = i.find('a')['href']
         enhanced_img_link = hemi_main_url + link
         #move to page with full picture
@@ -80,21 +79,25 @@ def scrape():
         soup = bs(html, 'html.parser')
         enhanced_img = soup.find("div", class_="downloads")
         final_link = enhanced_img.find('a')['href']
-
     
-        full_url_dict.append({
-            "Hemisphere Image" : title, 
-            "URL" : final_link
-        })
+    
+    full_image_url_link = (hemi_main_url + final_link)
+#     print(title)
+#     print(full_image_url_link)
+    
+    full_url_dict.append({
+        "Hemisphere Image" : title_hemi, 
+        "URL" : final_link
+    })
 
-    mars_data['title'] = title
-    mars_data['news_p'] = news_p
-    mars_data['featured_image_url'] = featured_image_url
-    mars_data['full_url_dict'] = full_url_dict
+    mars_jnData['title'] = title
+    mars_jnData['news_p'] = news_p
+    mars_jnData['featured_image_url'] = featured_image_url
+    mars_jnData['full_url_dict'] = full_url_dict
 
     browser.quit()
     
-    return mars_data
+    return mars_jnData
 
 
 
