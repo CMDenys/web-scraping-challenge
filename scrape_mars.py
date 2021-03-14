@@ -5,7 +5,7 @@ import pandas as pd
 import pymongo
 
 def init_browser():
-    # @NOTE: Replace the path with your actual path to the chromedriver
+    # Open ChromeDriver
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=False)
 
@@ -14,7 +14,7 @@ def scrape():
     browser = init_browser()
 
     mars_data = {}
-
+   
     #First step, visit the mars.nasa.gov.news website.
     news_url = "https://mars.nasa.gov/news/"
     browser.visit(news_url)
@@ -23,11 +23,12 @@ def scrape():
     #scrape the most recent title
     start = soup.find('li', class_="slide")
     title = start.find('div', class_='content_title').text.strip()
-    title
+    
 
     #scrape the most recent teaser paragraph
-    news_p = soup.find_all("div", class_= "article_teaser_body")[0].text.strip()
-    news_p
+    news_start = soup.find("li", class_= "slide")
+    news_p = news_start.find('div', class_="article_teaser_body").text
+    
 
     #Second step, visit  JPL
     jpl_url = "https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html"
@@ -43,10 +44,8 @@ def scrape():
         link = image.find("a")
         href = link['href']
         
-        print("https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/" + href)
-        
-    featured_image_url = 'https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/image/featured/mars2.jpg'
-        
+        featured_image_url = ("https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/" + href)
+
     #Fact Tables
     facts_url = 'https://space-facts.com/mars/'
     tables = pd.read_html(facts_url)
@@ -87,13 +86,15 @@ def scrape():
             "Hemisphere Image" : title, 
             "URL" : final_link
         })
-    
-full_url_dict
 
-mars_data['title'] = title
-mars_data['news_p'] = news_p
-mars_data['featured_image_url'] = featured_image_url
-mars_data['full_url_dict'] = full_url_dict
+    mars_data['title'] = title
+    mars_data['news_p'] = news_p
+    mars_data['featured_image_url'] = featured_image_url
+    mars_data['full_url_dict'] = full_url_dict
+
+    browser.quit()
+    
+    return mars_data
 
 
 
