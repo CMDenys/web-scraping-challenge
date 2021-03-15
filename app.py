@@ -12,8 +12,8 @@ mongo = PyMongo(app)
 # Route to render index.html template using data from Mongo
 @app.route("/")
 def index():
-    mars_jnData = mongo.db.mars_jnData.find_one()
-    return render_template("index.html", mars_jnData=mars_jnData)
+    mars_data = mongo.db.mars_data.find_one()
+    return render_template("index.html", mars_data=mars_data)
     
 
 
@@ -22,10 +22,10 @@ def index():
 def scrape():
     
     #run scrape function
-    mars_jnData = scrape_mars.scrape_info()
+    mars_data = scrape_mars.scrape_info()
     
     #update the Mongo database
-    mongo.db.mars_jnData.update({}, mars_jnData, upsert=True)
+    mongo.db.mars_data.update({}, mars_data, upsert=True)
 
     #redirect back to homepage
     return redirect("/", code=302)

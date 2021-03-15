@@ -12,7 +12,7 @@ def init_browser():
 def scrape():
     browser = init_browser()
 
-    mars_jnData = {}
+    mars_data = {}
    
     #First step, visit the mars.nasa.gov.news website.
     news_url = "https://mars.nasa.gov/news/"
@@ -90,14 +90,14 @@ def scrape():
         "URL" : final_link
     })
 
-    mars_jnData['title'] = title
-    mars_jnData['news_p'] = news_p
-    mars_jnData['featured_image_url'] = featured_image_url
-    mars_jnData['full_url_dict'] = full_url_dict
+    mars_data['title'] 
+    mars_data['news_p'] 
+    mars_data['featured_image_url'] 
+    mars_data['full_url_dict'] 
 
     browser.quit()
     
-    return mars_jnData
+    return mars_data
 
 
 
