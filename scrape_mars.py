@@ -28,7 +28,6 @@ def scrape():
     #scrape the most recent title
     start = soup.find('li', class_="slide")
     title = start.find('div', class_='content_title').text.strip()
-    
 
     #scrape the most recent teaser paragraph
     news_start = soup.find("li", class_= "slide")
@@ -40,32 +39,24 @@ def scrape():
     mars_data["title"] = title
     mars_data["news_p"] = news_p
     
+    #Second step, visit  JPL
+    jpl_url = "https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html"
+    browser.visit(jpl_url)
+    time.sleep(1)
+    browser.find_link_by_partial_text('FULL IMAGE').click()
+    html = browser.html
+    # Parse HTML with Beautiful Soup
+    soup = bs(html, 'html.parser')
+    # Retrieve all elements that contain book information
+    images = soup.find_all('div', class_='floating_text_area')
 
-
-
-
-
-
-
-
-
-
-
-#     #Second step, visit  JPL
-#     jpl_url = "https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html"
-#     browser.visit(jpl_url)
-
-#     html = browser.html
-#     # Parse HTML with Beautiful Soup
-#     soup = bs(html, 'html.parser')
-#     # Retrieve all elements that contain book information
-#     images = soup.find_all('div', class_='floating_text_area')
-
-#     for image in images:
-#         link = image.find("a")
-#         href = link['href']
+    for image in images:
+        link = image.find("a")
+        href = link['href']
         
-#         featured_image_url = ("https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/" + href)
+        featured_image_url = ("https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/" + href)
+
+        mars_data["featured_image_url"] = featured_image_url
 
 #     #Fact Tables
 #     facts_url = 'https://space-facts.com/mars/'
@@ -113,7 +104,7 @@ def scrape():
   
 
   
-#     mars_data["featured_image_url"] = featured_image_url
+#     mars_data
 #     mars_data["full_url_dict"] = full_url_dict
  
 
