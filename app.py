@@ -22,10 +22,10 @@ def index():
 def scrape():
     
     #run scrape function
-    mars_data = scrape_mars.scrape_info()
+    mars_data = scrape_mars.scrape()
     
     #update the Mongo database
-    mongo.db.mars_data.update({}, mars_data, upsert=True)
+    mongo.db.mmars_data.update({}, mars_data, upsert=True)
 
     #redirect back to homepage
     return redirect("/", code=302)
