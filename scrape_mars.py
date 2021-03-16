@@ -2,6 +2,7 @@ from splinter import Browser
 from bs4 import BeautifulSoup as bs
 from webdriver_manager.chrome import ChromeDriverManager
 import time
+import pandas as pd
 
 
 # def init_browser():
@@ -32,9 +33,6 @@ def scrape():
     #scrape the most recent teaser paragraph
     news_start = soup.find("li", class_= "slide")
     news_p = news_start.find('div', class_="article_teaser_body").text
-
-    print(title)
-    print(news_p)
     
     mars_data["title"] = title
     mars_data["news_p"] = news_p
@@ -58,14 +56,15 @@ def scrape():
 
         mars_data["featured_image_url"] = featured_image_url
 
-#     #Fact Tables
-#     facts_url = 'https://space-facts.com/mars/'
-#     tables = pd.read_html(facts_url)
-#     mars_table_df = tables[0]
-#     mars_table_df.rename(columns={"0": "Mars Planet Profile", "1" : "Facts"}, inplace=True)
-#     html_table = mars_table_df.to_html()
-#     html_table.replace('\n', '')
-#     mars_table.to_html('table.html')
+    #Fact Tables
+    facts_url = 'https://space-facts.com/mars/'
+    tables = pd.read_html(facts_url)
+    mars_table_df = tables[0]
+    mars_html_table = mars_table_df.to_html()
+    mars_html_table = mars_html_table.replace('\n', '')
+    mars_html_table
+    
+    mars_data["mars_html_table"] = mars_html_table
 
 #     #Hemispheres
 #     hemi_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
@@ -104,7 +103,7 @@ def scrape():
   
 
   
-#     mars_data
+#     
 #     mars_data["full_url_dict"] = full_url_dict
  
 
