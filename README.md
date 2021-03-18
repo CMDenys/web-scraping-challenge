@@ -17,18 +17,18 @@ Mars Facts
 - The third scrape is from the Mars Facts webpage here and is a table of relevant facts.  Pandas was used to scrape the table containing facts about the planet and data was then converted to an HTML table string.
 - 
 Mars Hemispheres
+- The third scrape is from the USGS Astrogeology site and consists of high resolution images for each of Mar's hemispheres.  A python dictionary was used to store the the data with a list containing one dictionary for each hemisphere.  A for loop was used to append each dictionary with the hemisphere title and url string.
 
 
-Visit the USGS Astrogeology site here to obtain high resolution images for each of Mar's hemispheres.
+Step 2 - MongoDB and Flask Application
 
+MongoDB with Flask templating was used to create a new HTML page that displays all of the scraped information collected above.
 
-You will need to click each of the links to the hemispheres in order to find the image url to the full resolution image.
+The initial upyter notebook was converted into a Python script called scrape_mars.py with a function called scrape that executes the code above and returns one Python dictionary containing all of the scraped data.
 
+Next, a route called scrape_mars.py was created to call the scrape function and the data was returned and stored in Mongo as a Python dictionary.
 
-Save both the image url string for the full resolution hemisphere image, and the Hemisphere title containing the hemisphere name. Use a Python dictionary to store the data using the keys img_url and title.
-
-
-Append the dictionary with the image url string and the hemisphere title to a list. This list will contain one dictionary for each hemisphere.
+Lastly, an html template was created to display the data passed on from the Mongo database.  
 
 
 
