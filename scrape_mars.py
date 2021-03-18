@@ -3,18 +3,23 @@ from bs4 import BeautifulSoup as bs
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import pandas as pd
+import requests
+
+import os
+
+ALLOWED_EXTENSIONS = set(['jpg'])
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def scrape_info():
 
 
-# def init_browser():
-   
-
-
-def scrape():
-    
- # Open ChromeDriver
+    # def init_browser(): ----------------------------------------------------------
+    # Open ChromeDriver
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=False)
-    # browser= init_browser()
+        # browser= init_browser()
 
     #First step, visit the mars.nasa.gov.news website.
     news_url = "https://mars.nasa.gov/news/"
@@ -23,21 +28,21 @@ def scrape():
 
     mars_data = {}
 
-    #html object
+    #html object -----------------------------------------------------------------
     html = browser.html
     soup = bs(html, 'html.parser')
-    #scrape the most recent title
+    #scrape the most recent title  -----------------------------------------------
     start = soup.find('li', class_="slide")
     title = start.find('div', class_='content_title').text.strip()
 
-    #scrape the most recent teaser paragraph
+    #scrape the most recent teaser paragraph -------------------------------------
     news_start = soup.find("li", class_= "slide")
     news_p = news_start.find('div', class_="article_teaser_body").text
-    
+        
     mars_data["title"] = title
     mars_data["news_p"] = news_p
-    
-    #Second step, visit  JPL
+        
+    #Featured image jpl ----------------------------------------------------------
     jpl_url = "https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html"
     browser.visit(jpl_url)
     time.sleep(1)
@@ -56,62 +61,47 @@ def scrape():
 
         mars_data["featured_image_url"] = featured_image_url
 
-    #Fact Tables
+    #Fact Tables ------------------------------------------------------------------
     facts_url = 'https://space-facts.com/mars/'
     tables = pd.read_html(facts_url)
     mars_table_df = tables[0]
-    mars_html_table = mars_table_df.to_html()
-    mars_html_table = mars_html_table.replace('\n', '')
-    mars_html_table
-    
-    mars_data["mars_html_table"] = mars_html_table
+    mars_tableII = mars_table_df.set_index(0, inplace=True)
+    mars_tableIII = mars_table_df.rename(columns={0:' ',1:' '})
+    mars_html_table = mars_tableIII.to_html()
+    mars_html_table_clean = mars_html_table.replace("\n", "")
+    mars_html_table_clean
+    mars_data['mars_html_table_clean'] = mars_html_table_clean
 
-#     #Hemispheres
-#     hemi_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
-#     # Setup splinter
-#     executable_path = {'executable_path': ChromeDriverManager().install()}
-#     browser = Browser('chrome', **executable_path, headless=False)
+    #Hemispheres -------------------------------------------------------------------
 
-#     browser.visit(hemi_url)
-#     html = browser.html
-#     soup = bs(html, 'html.parser')
+    # Setup splinter
+    # executable_path = {'executable_path': ChromeDriverManager().install()}
+    # browser = Browser('chrome', **executable_path, headless=False)
 
-#     hemi_main_url = "https://astrogeology.usgs.gov"
-#     full_url_dict = []
+    hemi_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
 
-#     hemi_names = soup.find_all('div', class_='item')
+    browser.visit(hemi_url)
 
-#     for i in hemi_names:
-#         title_hemi = i.find("h3").text.strip()
-#         link = i.find('a')['href']
-#         enhanced_img_link = hemi_main_url + link
-#         #move to page with full picture
-#         browser.visit(enhanced_img_link)
-#         html = browser.html
-#         soup = bs(html, 'html.parser')
-#         enhanced_img = soup.find("div", class_="downloads")
-#         final_link = enhanced_img.find('a')['href']
-    
-    
-#     full_image_url_link = (hemi_main_url + final_link)
-# #     print(title)
-# #     print(full_image_url_link)
-    
-#     full_url_dict.append({
-#         "Hemisphere Image" : title_hemi, 
-#         "URL" : final_link
-  
+    jpg_list=browser.find_by_css("a.product-item h3")
 
-  
-#     
-#     mars_data["full_url_dict"] = full_url_dict
- 
+    mars_hemi_image_urls = []
 
-    browser.quit()  
+    for x in range(len(jpg_list)):
+        hemi={}
+        browser.find_by_css("a.product-item h3")[x].click()
+        sample = browser.links.find_by_text("Sample").first
+        hemi["img_url"]=sample["href"]
+        hemi["title"]=browser.find_by_css("h2.title").text
+        mars_hemi_image_urls.append(hemi)
+        browser.back()
+
+    mars_hemi_image_urls    
+    mars_data["hemi"]=mars_hemi_image_urls 
+
+
+    browser.quit()
+
     return mars_data
 
-
-
-
-    
-
+if __name__ == "__main__":
+    print(scrape_info())

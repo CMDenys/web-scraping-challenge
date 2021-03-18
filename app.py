@@ -22,7 +22,7 @@ def index():
 def scrape():
     
     #run scrape function
-    mars_data = scrape_mars.scrape()
+    mars_data = scrape_mars.scrape_info()
     
     #update the Mongo database
     mongo.db.mmars_data.update({}, mars_data, upsert=True)
