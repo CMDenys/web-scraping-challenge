@@ -1,14 +1,21 @@
-<h1 style="color:blue"> web-scraping-challenge </h1>
+<h1> web-scraping-challenge </h1>
+Built a web application that scrapes various websites for data related to the Mission to Mars and displays the information in a single HTML page.
 
-
-Step 1 - Scraping
+<h1>Step 1 - Scraping</h1>
 
 Initital scraping was done using Jupyter Notebook, BeautifulSoup, Pandas, and Requests/Splinter.
 
-Created a Jupyter Notebook file called mission_to_mars.ipynb and used it to complete all scraping and analysis tasks. The following outlines what was scraped.
+Created a Jupyter Notebook file called mission_to_mars.ipynb and used it to complete all scraping and analysis tasks. 
 
-<u>NASA Mars News</u>
-- The first scrape is from the Nasa Mars site and consisted of the both the latest News Title and Paragraph Text.
+<strong>The following outlines what was scraped:</strong>
+
+NASA Mars News
+The first scrape is from the Nasa Mars site and consisted of the both the latest News Title and Paragraph Text.
+<p float="left" align="center">
+  <img src="images/news_article.png" width=500" />
+  <img src="images/news.png" width="300" /> 
+</p>
+
 
 JPL Mars Space Images - Featured Image
 - The second srape is of the JPL Featured Space Image.  Splinter was used to navigate the site and find the image url for the current Featured Mars Image.  Once found, the image url string was assigned a variable called featured_image_url.
