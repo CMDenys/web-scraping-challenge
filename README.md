@@ -10,6 +10,7 @@ Created a Jupyter Notebook file called mission_to_mars.ipynb and used it to comp
 <strong>The following outlines what was scraped:</strong>
 
 <strong>NASA Mars News</strong>
+
 The first scrape is from the Nasa Mars site and consisted of the both the latest News Title and Paragraph Text.
 <p float="left" align="center">
   <img src="images/news_article.png" width=450" />
@@ -18,6 +19,7 @@ The first scrape is from the Nasa Mars site and consisted of the both the latest
 
 
 <strong>JPL Mars Space Images - Featured Image</strong>
+                                        
 The second srape is of the JPL Featured Space Image.  Splinter was used to navigate the site and find the image url for the current Featured Mars Image.  Once found, the image url string was assigned a variable called featured_image_url.
 <p float="left" align="center">
   <img src="images/featuredImage.png" width="450" />
