@@ -25,7 +25,7 @@ The second srape is of the JPL Featured Space Image.  Splinter was used to navig
 </p>                                      
                                        
 
-<h4>strong>Mars Facts</h4>
+<h4>Mars Facts</h4>
 The third scrape is from the Mars Facts webpage and is a table of relevant facts.  Pandas was used to scrape the table containing facts about the planet and data was then converted to an HTML table string.
 <p float="left" align="center">
   <img src="images/fact_table.png" width="450" />
