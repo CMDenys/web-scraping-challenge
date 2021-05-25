@@ -24,7 +24,7 @@ Step 2 - MongoDB and Flask Application
 
 MongoDB with Flask templating was used to create a new HTML page that displays all of the scraped information collected above.
 
-The initial upyter notebook was converted into a Python script called scrape_mars.py with a function called scrape that executes the code above and returns one Python dictionary containing all of the scraped data.
+The initial jupyter notebook was converted into a Python script called scrape_mars.py with a function called scrape that executes the code above and returns one Python dictionary containing all of the scraped data.
 
 Next, a route called scrape_mars.py was created to call the scrape function and the data was returned and stored in Mongo as a Python dictionary.
 
