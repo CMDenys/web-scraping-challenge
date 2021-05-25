@@ -34,8 +34,8 @@ The second srape is of the JPL Featured Space Image.  Splinter was used to navig
 
 Mars Hemispheres
 - The third scrape is from the USGS Astrogeology site and consists of high resolution images for each of Mar's hemispheres.  A python dictionary was used to store the the data with a list containing one dictionary for each hemisphere.  A for loop was used to append each dictionary with the hemisphere title and url string.
-<p float="left">
-  <img src="images/hemispheres.png" width="400" />
+<p align="center">
+  <img src="images/hemispheres.png" width="500" />
 <p float="right" align="center">
   <img src="images/hemiI.png" width="400" />
   <img src="images/hemiII.png" width="400" /> 
