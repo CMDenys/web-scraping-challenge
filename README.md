@@ -12,8 +12,8 @@ Created a Jupyter Notebook file called mission_to_mars.ipynb and used it to comp
 NASA Mars News
 The first scrape is from the Nasa Mars site and consisted of the both the latest News Title and Paragraph Text.
 <p float="left" align="center">
-  <img src="images/news_article.png" width=300" />
-  <img src="images/news.png" width="300" /> 
+  <img src="images/news_article.png" width=400" />
+  <img src="images/news.png" width="500" /> 
 </p>
 
 
