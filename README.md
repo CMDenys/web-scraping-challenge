@@ -7,7 +7,7 @@ Initital scraping was done using Jupyter Notebook, BeautifulSoup, Pandas, and Re
 
 Created a Jupyter Notebook file called mission_to_mars.ipynb and used it to complete all scraping and analysis tasks. 
 
-<strong>The following outlines what was scraped:</strong>
+<h3>The following outlines what was scraped:</h3>
 
 <strong>NASA Mars News</strong>
 The first scrape is from the Nasa Mars site and consisted of the both the latest News Title and Paragraph Text.
