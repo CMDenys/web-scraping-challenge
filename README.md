@@ -9,7 +9,7 @@ Created a Jupyter Notebook file called mission_to_mars.ipynb and used it to comp
 
 <strong>The following outlines what was scraped:</strong>
 
-<u>NASA Mars News</u>
+<p><u>NASA Mars News</u></p>
 The first scrape is from the Nasa Mars site and consisted of the both the latest News Title and Paragraph Text.
 <p float="left" align="center">
   <img src="images/news_article.png" width=450" />
