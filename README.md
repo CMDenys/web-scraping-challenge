@@ -7,9 +7,9 @@ Initital scraping was done using Jupyter Notebook, BeautifulSoup, Pandas, and Re
 
 Created a Jupyter Notebook file called mission_to_mars.ipynb and used it to complete all scraping and analysis tasks. 
 
-<h3>The following outlines what was scraped:</h3>
+<h2>The following outlines what was scraped:</h2>
 
-<h5>NASA Mars News</h5>
+<h4>NASA Mars News</h4>
 The first scrape is from the Nasa Mars site and consisted of the both the latest News Title and Paragraph Text.
 <p float="left" align="center">
   <img src="images/news_article.png" width=450" />
@@ -17,7 +17,7 @@ The first scrape is from the Nasa Mars site and consisted of the both the latest
 </p>
 
 
-<strong>JPL Mars Space Images - Featured Image</strong>                                 
+<h4>JPL Mars Space Images - Featured Image</h4>                                
 The second srape is of the JPL Featured Space Image.  Splinter was used to navigate the site and find the image url for the current Featured Mars Image.  Once found, the image url string was assigned a variable called featured_image_url.
 <p float="left" align="center">
   <img src="images/featuredImage.png" width="450" />
@@ -25,14 +25,14 @@ The second srape is of the JPL Featured Space Image.  Splinter was used to navig
 </p>                                      
                                        
 
-<strong>Mars Facts</strong>
+<h4>strong>Mars Facts</h4>
 The third scrape is from the Mars Facts webpage and is a table of relevant facts.  Pandas was used to scrape the table containing facts about the planet and data was then converted to an HTML table string.
 <p float="left" align="center">
   <img src="images/fact_table.png" width="450" />
   <img src="images/table.png" width="450" /> 
 </p> 
 
-<strong>Mars Hemispheres</strong>
+<h4>Mars Hemispheres</h4>
 The third scrape is from the USGS Astrogeology site and consists of high resolution images for each of Mar's hemispheres.  A python dictionary was used to store the the data with a list containing one dictionary for each hemisphere.  A for loop was used to append each dictionary with the hemisphere title and url string.
 <p align="center">
   <img src="images/hemispheres.png" width="600" />
