@@ -1,4 +1,4 @@
-<h1> web-scraping-challenge </h1>
+
 Built a web application that scrapes various websites for data related to the Mission to Mars and displays the information in a single HTML page.
 
 <h1>Step 1 - Scraping</h1>
